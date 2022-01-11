@@ -1,0 +1,10 @@
+.Rproj.user
+inst/doc
+.Rbuildignore
+dev/
+*.Rproj
+*icloud*
+.Rhistory
+.Rdata
+.httr-oauth
+.DS_Store

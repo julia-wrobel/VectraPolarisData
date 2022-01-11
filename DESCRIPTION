@@ -1,0 +1,26 @@
+Package: VectraPolarisData
+Title: Vectra Polaris multiplex imaging data by Akoya Biosciences
+Version: 0.99.0
+Date: 2021-11-16
+Authors@R: c(
+    person("Wrobel", "Julia", , "julia.wrobel@cuanschutz.edu", role = c("aut", "cre"),
+    comment = c(ORCID = "0000-0001-6783-1421")),
+    person("Tusharkanti", "Ghosh", role = "aut", email = "tusharkanti.ghosh@cuanschutz.edu"),
+    person("Lukas", "Weber", role = "aut", email = "lukas.weber@jhu.edu"))
+Description: Provides two multiplex imaging datasets as Spatial Experiment objects (EXPAND)
+URL: 
+BugReports: https://support.bioconductor.org/t/VectraPolarisData
+biocViews: ExperimentHub
+Depends:
+    ExperimentHub,
+    SpatialExperiment
+RoxygenNote: 7.1.2
+Suggests: 
+    BiocStyle,
+    knitr,
+    RefManageR,
+    rmarkdown,
+    sessioninfo
+VignetteBuilder: knitr
+Encoding: UTF-8
+License: Artistic-2.0
