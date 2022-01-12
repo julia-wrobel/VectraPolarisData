@@ -45,5 +45,5 @@ tax_ids <- c(
     "Homo sapiens" = "9606")
 df$TaxonomyId <- tax_ids[df$Species]
 
-fnm <- "~/Documents/software/VectraPolarisData/inst/extdata/metadata.csv"
+fnm <- "inst/extdata/metadata.csv"
 write.csv(df, fnm, row.names = FALSE)
