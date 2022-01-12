@@ -12,6 +12,7 @@ readVectraTable <- function(sample_path = "", # path to where one or multiple tx
 ){
 
     # get file names
+    # throw errors/warnings
     files <- list.files(sample_path, pattern = ".txt",
                         full.names = TRUE)
 
@@ -56,6 +57,7 @@ readVectraTable <- function(sample_path = "", # path to where one or multiple tx
         spatial_vars <- c("cell_x_position", "cell_y_position", "in_tissue",
                           names(df)[grep("distance", names(df))])
 
+        # this slot will be all colData, spatialCoords will still exist
         spatialData <- subset(df, select = spatial_vars)
 
         # make into spe object
@@ -65,7 +67,7 @@ readVectraTable <- function(sample_path = "", # path to where one or multiple tx
                           membrane_intensities = membrane_assay),
             sample_id = df$sample_name,
             colData = DataFrame(subset(df, select = colData_vars)),
-            spatialData=DataFrame(spatialData),
+            spatialData=DataFrame(spatialData), # won't exist in update to SpatialExperiment
             spatialCoordsNames = c("cell_x_position", "cell_y_position")
         )
     }) # end lapply

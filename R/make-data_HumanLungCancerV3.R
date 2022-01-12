@@ -9,6 +9,11 @@ spe_lung = readVectraTable(sample_path = file_path,
                            save = FALSE)
 
 
+# Data has 8 markers for 1604786 cells.
+# 153 subjects
+# 761 total images
+
+
 ######################################################################
 # Load clinical data
 file_path_clinical = "~/Data/2021/202108_schenk_normalization/Lung_clinical.csv"
@@ -25,6 +30,7 @@ clinical_data = clinical_data %>%
          lvi, surgery, survival_days, censor_0_alive_1_dead, cause_of_death, adjuvant_therapy, therapy_type, number_cycles,
          date_of_recurrence, time_to_recurrence_days, pack_years, accession_date, duration,chemo_type_s, path)
 
+
 ######################################################################
 # Add clinical data to spe object via colData
 # How do I easily add more colData to spatialExperiment object
@@ -33,6 +39,13 @@ unique(colData(spe_lung)$slide_id) %>% head()
 clinical_data$patient_id %>% head()
 
 # need to match patient_id with slide_id
+
+# make small separate table and add to metadata slot
+# experiment_info example in GitHub
+# https://bioconductor.org/packages/release/workflows/html/cytofWorkflow.html
+     # Vignette for CyTOF workflow has some examples
+     # https://bioconductor.org/packages/release/workflows/html/cytofWorkflow.html
+  # Use the same sample name
 
 
 ######################################################################

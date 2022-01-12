@@ -1,11 +1,10 @@
 df <- data.frame(
     BiocVersion = "3.14",
-    Genome = NA,  # ??
-    SourceType = "tar.gz", # ??
-    SourceVersion = NA, # ??
-    Coordinate_1_based = TRUE, # ??
-    DataProvider = " Ben Bitler", # Do I want to put the name of the investigators here or the name of the company that makes the biotechnology?
-    Chemistry = "Chromium_v1", # ??
+    Genome = NA,
+    SourceType = "txt",
+    SourceVersion = NA,
+    Coordinate_1_based = NA,
+    DataProvider = NA, # Add info in help file /Vignette
     RDataClass = "SpatialExperiment",
     DispatchClass = "Rda",
     Maintainer = "Julia Wrobel <julia.wrobel@cuanschutz.edu>",
@@ -20,7 +19,7 @@ dfs <- list(
         Title = "HumanLungCancerV3",
         Species = "Homo sapiens",
         RDataPath = file.path(dir, "HumanLungCancerV3.rda"),
-        SourceUrl = "", # ?? (This data is not currently publicly available)
+        SourceUrl = NA,
         Description = paste(
             "Vectra 3 multiplex immunohistochemistry (mIHC) dataset",
             "of non-small cell lung cancer tissue with",
@@ -30,7 +29,7 @@ dfs <- list(
         Title = "HumanOvarianCancerVP",
         Species = "Homo sapiens",
         RDataPath = file.path(dir, "HumanOvarianCancerVP.rda"),
-        SourceUrl = "",                                         ## ??
+        SourceUrl = NA,
         Description = paste(
             "Vectra Polaris multiplex immunohistochemistry (mIHC) dataset",
             "of cancerous ovarian tissue with",
