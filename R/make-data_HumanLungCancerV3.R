@@ -1,6 +1,9 @@
 # Human Lung Cancer from Vectra 3 experiment
 library(tidyverse)
 library(SpatialExperiment)
+library(VectraPolarisData)
+
+source("inst/scripts/make-data.R")
 
 ######################################################################
 # Convert Inform-processed mIHC data to SpatialExperiment object
@@ -22,13 +25,16 @@ clinical_data = read_csv(file_path_clinical)
 
 ######################################################################
 # Process clinical data
-# Check with Erin Schenk about understanding these data- check the original paper
-# Include a subset of these features
+# survival_status is censoring variable 0 = alive, 1 = dead
 clinical_data = clinical_data %>%
   janitor::clean_names() %>%
-  select(patient_id, gender, age_at_diagnosis, date_of_diagnosis, stage_at_diagnosis, stage_numeric, t, n, m, largest_size, number_ln_taken, number_ln,
-         lvi, surgery, survival_days, censor_0_alive_1_dead, cause_of_death, adjuvant_therapy, therapy_type, number_cycles,
-         date_of_recurrence, time_to_recurrence_days, pack_years, accession_date, duration,chemo_type_s, path)
+  # select variables of interest
+  select(patient_id, gender, age_at_diagnosis, stage_at_diagnosis,  stage_numeric, pack_years,
+         survival_days, survival_status = censor_0_alive_1_dead,
+         #t, n, m, largest_size, number_ln_taken, number_ln, lvi,  # commenting out because don't know what these variables are
+         #therapy_type, number_cycles, # these don't seem too useful from a data analysis standpoint (lots of NAs)
+         surgery,  cause_of_death, adjuvant_therapy,
+         time_to_recurrence_days, recurrence_or_lung_ca_death)
 
 
 ######################################################################
@@ -45,7 +51,20 @@ clinical_data$patient_id %>% head()
 # https://bioconductor.org/packages/release/workflows/html/cytofWorkflow.html
      # Vignette for CyTOF workflow has some examples
      # https://bioconductor.org/packages/release/workflows/html/cytofWorkflow.html
-  # Use the same sample name
+
+
+# process patient id variable (called slide_id in the Vectra data) to match up with Vectra data
+vectra_id = tibble(slide_id = unique(colData(spe_lung)$slide_id),
+       id = slide_id) %>%
+  separate(id, into = c("number", "patient_id"), sep = " ") %>%
+  select(-number)
+
+# merge with clinical_data
+clinical_data = inner_join(vectra_id, clinical_data, by = "patient_id") %>%
+  select(-patient_id)
+
+# add as table to the dataset
+# check if Lukas as updated spatialExperiment package
 
 
 ######################################################################
