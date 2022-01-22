@@ -7,7 +7,7 @@ source("inst/scripts/make-data.R")
 
 ######################################################################
 # Convert Inform-processed mIHC data to SpatialExperiment object
-file_path = "~/Data/2021/202108_schenk_normalization"
+file_path = "data"
 spe_lung = readVectraTable(sample_path = file_path,
                            save = FALSE)
 
@@ -17,7 +17,7 @@ spe_lung = readVectraTable(sample_path = file_path,
 
 ######################################################################
 # Load clinical data
-file_path_clinical = "~/Data/2021/202108_schenk_normalization/Lung_clinical.csv"
+file_path_clinical = "data/Lung_clinical.csv"
 clinical_data = read_csv(file_path_clinical)
 
 ######################################################################

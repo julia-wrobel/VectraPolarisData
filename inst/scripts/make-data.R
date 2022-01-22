@@ -7,7 +7,7 @@
 
 ## sample_path should point to a directory with one or multiple txt files
 readVectraTable <- function(sample_path = "", # path to where one or multiple txt files stored
-                            save = TRUE, # should you save processed data to a local director
+                            save = FALSE, # should you save processed data to a local director
                             out_path = "data/HumanLungCancerV3.rda"      # name directory to save the processed files to
 ){
 

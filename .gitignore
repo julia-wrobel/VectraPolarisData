@@ -1,7 +1,7 @@
 .Rproj.user
 inst/doc
 .Rbuildignore
-data/
+*data*
 *.Rproj
 *icloud*
 .Rhistory
