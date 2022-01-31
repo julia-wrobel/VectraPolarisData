@@ -32,7 +32,7 @@ readVectraTable <- function(sample_path = "", # path to where one or multiple tx
         df = janitor::clean_names(df)
 
         # add "in_tissue" variable
-        df$in_tissue = ifelse(tolower(df$tissue_category) == "slide", 0, 1)
+        #df$in_tissue = ifelse(tolower(df$tissue_category) == "slide", 0, 1)
 
         # define matrices for assays. All assays have same rownames
         intensities_assay <- t(as.matrix(subset(df, select = names(df)[intersect(grep("entire_cell", names(df)), grep("_mean", names(df)))])))
@@ -51,6 +51,7 @@ readVectraTable <- function(sample_path = "", # path to where one or multiple tx
         ## define variables for different slots
         # stat summaries of marker intensities including standard deviation, min, max, and total go into colData
         colData_vars <- c("cell_id", "tissue_category", "slide_id",
+                          "cell_x_position", "cell_y_position",
                           names(df)[grep("area|phenotype|axis|compactness|min|max|std_dev|total", names(df))] )
 
         # make into spe object

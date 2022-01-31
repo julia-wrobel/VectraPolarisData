@@ -7,13 +7,17 @@ source("inst/scripts/make-data.R")
 
 ######################################################################
 # Convert Inform-processed mIHC data to SpatialExperiment object
-file_path = "data"
-spe_lung = readVectraTable(sample_path = file_path,
+sample_path = "data"
+spe_lung = readVectraTable(sample_path = sample_path,
                            save = FALSE)
 
 # Data has 8 markers for 1604786 cells.
 # 153 subjects
 # 761 total images
+
+# change a few names
+# dapi_dapi to dapi
+# remove autofluorescence stuff
 
 ######################################################################
 # Load clinical data
