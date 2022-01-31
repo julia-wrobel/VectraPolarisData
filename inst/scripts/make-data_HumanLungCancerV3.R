@@ -37,13 +37,6 @@ clinical_data = clinical_data %>%
 ######################################################################
 # Add clinical data to spe object via colData
 
-# make small separate table and add to metadata slot
-# experiment_info example in GitHub
-# https://bioconductor.org/packages/release/workflows/html/cytofWorkflow.html
-     # Vignette for CyTOF workflow has some examples
-     # https://bioconductor.org/packages/release/workflows/html/cytofWorkflow.html
-
-
 # process patient id variable (called slide_id in the Vectra data) to match up with Vectra data
 vectra_id = tibble(slide_id = unique(colData(spe_lung)$slide_id),
        id = slide_id) %>%
@@ -56,6 +49,14 @@ clinical_data = inner_join(vectra_id, clinical_data, by = "patient_id") %>%
 
 # add as table to the dataset
 # check if Lukas as updated spatialExperiment package
+# check how multiplex imaging data is stored in imctools package
+
+# make small separate table and add to metadata slot
+# experiment_info example in GitHub
+# https://bioconductor.org/packages/release/workflows/html/cytofWorkflow.html
+# Vignette for CyTOF workflow has some examples
+# https://bioconductor.org/packages/release/workflows/html/cytofWorkflow.html
+#http://bioconductor.org/books/3.13/OSCA.intro/the-singlecellexperiment-class.html
 
 
 ######################################################################
