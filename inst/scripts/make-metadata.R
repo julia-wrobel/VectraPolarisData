@@ -23,7 +23,7 @@ dfs <- list(
         Description = paste(
             "Vectra 3 multiplex immunohistochemistry (mIHC) dataset",
             "of non-small cell lung cancer tissue with",
-            "XX cells from YY total images from ZZ patients")  ## fill in these details
+            "1,604,786 cells from 761 total images from 153 patients")  ## fill in these details
     ),
     data.frame(
         Title = "HumanOvarianCancerVP",
@@ -32,7 +32,7 @@ dfs <- list(
         SourceUrl = NA,
         Description = paste(
             "Vectra Polaris multiplex immunohistochemistry (mIHC) dataset",
-            "of cancerous ovarian tissue with",
+            "from a tumor microarray of cancerous ovarian tissue with",
             "XX cells from YY total images from ZZ patients") ## fill in these details
     )
 )
