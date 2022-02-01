@@ -37,6 +37,7 @@ readVectraTable <- function(sample_path = "", # path to where one or multiple tx
         # define matrices for assays. All assays have same rownames
         intensities_assay <- t(as.matrix(subset(df, select = names(df)[intersect(grep("entire_cell", names(df)), grep("_mean", names(df)))])))
         rownames(intensities_assay) <- substr(rownames(intensities_assay), start = 13, stop = nchar(rownames(intensities_assay))-5)
+        rownames(intensities_assay)[grep("dapi", rownames(intensities_assay))] <- "dapi"
 
         nucleus_assay <- t(as.matrix(subset(df, select = names(df)[intersect(grep("nucleus", names(df)), grep("_mean", names(df)))])))
         rownames(nucleus_assay) <- substr(rownames(nucleus_assay), start = 9, stop = nchar(rownames(nucleus_assay))-5)
