@@ -41,9 +41,11 @@ readVectraTable <- function(sample_path = "", # path to where one or multiple tx
 
         nucleus_assay <- t(as.matrix(subset(df, select = names(df)[intersect(grep("nucleus", names(df)), grep("_mean", names(df)))])))
         rownames(nucleus_assay) <- substr(rownames(nucleus_assay), start = 9, stop = nchar(rownames(nucleus_assay))-5)
+        rownames(nucleus_assay)[grep("dapi", rownames(nucleus_assay))] <- "dapi"
 
         membrane_assay <- t(as.matrix(subset(df, select = names(df)[intersect(grep("membrane", names(df)), grep("_mean", names(df)))])))
         rownames(membrane_assay) <- substr(rownames(membrane_assay), start = 10, stop = nchar(rownames(membrane_assay))-5)
+        rownames(membrane_assay)[grep("dapi", rownames(membrane_assay))] <- "dapi"
 
 
         ###### add check that each assay has same number of variables
