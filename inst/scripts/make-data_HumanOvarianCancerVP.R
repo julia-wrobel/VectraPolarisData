@@ -9,9 +9,10 @@ source("inst/scripts/make-data.R")
 ######################################################################
 # Convert Inform-processed mIHC data to SpatialExperiment object
 sample_path = "data"
-spe_ovarian = readVectraPTable(sample_path = sample_path,
+spe_ovarian = readVectraTable(sample_path = sample_path,
                            save = FALSE)
 # Data has 10 markers for 1610431 cells.
+# 132 images
 # 132 subjects
 
 
@@ -33,7 +34,7 @@ clinical_data = clinical_data %>%
 ######################################################################
 # Add clinical data to spe object via colData
 
-# process patient id variable (called slide_id in the Vectra data) to match up with Vectra data
+# process sample id variable (called sample_name in the VectraPolaris data) to match up with Vectra data
 vectra_id <- tibble(sample_id = unique(colData(spe_ovarian)$sample_id),
                     id = sample_id) 
 ## for some reason, 'str_split_n' is not an exported object from 'namespace:stringr'
