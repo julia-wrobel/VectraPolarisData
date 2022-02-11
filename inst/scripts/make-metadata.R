@@ -33,7 +33,7 @@ dfs <- list(
         Description = paste(
             "Vectra Polaris multiplex immunohistochemistry (mIHC) dataset",
             "from a tumor microarray of cancerous ovarian tissue with",
-            "XX cells from YY total images from ZZ patients") ## fill in these details
+            "1,610,431 cells from YY total images from 132 patients") ## fill in these details
     )
 )
 
