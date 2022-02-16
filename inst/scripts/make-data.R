@@ -6,11 +6,8 @@
 
 
 ## sample_path should point to a directory with one or multiple txt files
-readVectraTable <- function(sample_path = "", # path to where one or multiple txt files stored
-                            save = FALSE) # ,should you save processed data to a local director
-                            #out_path = c("data/HumanLungCancerV3.rda", "data/HumanOvarianCancerVP.rda") 
-                           # name directory to save the processed files to
-){
+readVectraTable <- function(sample_path = "",
+                            save = FALSE){
 
     # get file names
     # throw errors/warnings
@@ -31,9 +28,6 @@ readVectraTable <- function(sample_path = "", # path to where one or multiple tx
 
         # convert column names to snake case
         df = janitor::clean_names(df)
-
-        # add "in_tissue" variable
-        #df$in_tissue = ifelse(tolower(df$tissue_category) == "slide", 0, 1)
 
         # define matrices for assays. All assays have same rownames
         intensities_assay <- t(as.matrix(subset(df, select = names(df)[intersect(grep("entire_cell", names(df)), grep("_mean", names(df)))])))
