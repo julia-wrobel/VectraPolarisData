@@ -1,12 +1,12 @@
 df <- data.frame(
     BiocVersion = "3.15",
     Genome = NA,
-    SourceType = "txt",
+    SourceType = "TXT",
     SourceVersion = NA,
     Coordinate_1_based = NA,
     DataProvider = NA, # Add info in help file /Vignette
     RDataClass = "SpatialExperiment",
-    DispatchClass = "Rda",
+    DispatchClass = "Rds",
     Maintainer = "Julia Wrobel <julia.wrobel@cuanschutz.edu>",
     stringsAsFactors = FALSE
 )
@@ -18,8 +18,8 @@ dfs <- list(
     data.frame(
         Title = "HumanLungCancerV3",
         Species = "Homo sapiens",
-        RDataPath = file.path(dir, "HumanLungCancerV3.rda"),
-        SourceUrl = NA,
+        RDataPath = file.path(dir, "spe_lung.rds"),
+        SourceUrl = "http://www.doi.org/10.1101/2021.02.24.432729",
         Description = paste(
             "Vectra 3 multiplex immunohistochemistry (mIHC) dataset",
             "of non-small cell lung cancer tissue with",
@@ -28,8 +28,8 @@ dfs <- list(
     data.frame(
         Title = "HumanOvarianCancerVP",
         Species = "Homo sapiens",
-        RDataPath = file.path(dir, "HumanOvarianCancerVP.rda"),
-        SourceUrl = NA,
+        RDataPath = file.path(dir, "spe_ovarian.rds"),
+        SourceUrl = "http://www.doi.org/10.1158/1541-7786.mcr-21-0411",
         Description = paste(
             "Vectra Polaris multiplex immunohistochemistry (mIHC) dataset",
             "from a tumor microarray of cancerous ovarian tissue with",
