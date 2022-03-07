@@ -1,0 +1,28 @@
+---
+title: "TENxVisiumData"
+author:
+- name: Julia Wrobel
+  affiliation: Department of Biostatistics and Informatics, Colorado School of Public Health
+output:
+  BiocStyle::html_document:
+    toc_float: true
+package: VectraPolarisData
+abstract: |
+  The VectraPolarisData ExperimentHub package provides two large multiplex immunofluorescence datasets collected by Akoya Biosciences Vectra 3 and Vectra Polaris platforms. Image preprocessing (cell segmentation and phenotyping) was performed using  Inform software. Data cover are formatted into objects of class SpatialExperiment.
+vignette: |
+  %\VignetteIndexEntry{TENxVisiumData}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(VectraPolarisData)
+```
