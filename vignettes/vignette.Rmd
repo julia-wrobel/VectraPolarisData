@@ -10,7 +10,7 @@ package: VectraPolarisData
 abstract: |
   The VectraPolarisData ExperimentHub package provides two large multiplex immunofluorescence datasets collected by Akoya Biosciences Vectra 3 and Vectra Polaris platforms. Image preprocessing (cell segmentation and phenotyping) was performed using  Inform software. Data cover are formatted into objects of class SpatialExperiment.
 vignette: |
-  %\VignetteIndexEntry{TENxVisiumData}
+  %\VignetteIndexEntry{VectraPolarisData}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
@@ -26,3 +26,89 @@ knitr::opts_chunk$set(
 ```{r setup}
 library(VectraPolarisData)
 ```
+
+
+# multiplex immunofluorescence imaging data
+
+## Available datasets
+
+List the two datasets here and mention that you have detailed data dictionaries below. Give a very brief overview of multiplex imaging data.
+
+
+
+# Loading the data
+
+To retrieve a dataset, we can use a dataset's corresponding named function `<id>()`, where `<id>` should correspond to one a valid dataset identifier (see `?TENxVisiumData`). E.g.:
+
+```{r}
+library(TENxVisiumData)
+spe <- HumanHeart()
+```
+
+Alternatively, data can loaded directly from Bioconductor's `r Biocpkg("ExerimentHub")` as follows. First, we initialize a hub instance and store the complete list of records in a variable `eh`. Using `query()`, we then identify any records made available by the `TENxVisiumData` package, as well as their accession IDs (EH1234). Finally, we can load the data into R via `eh[[id]]`, where `id` corresponds to the data entry's identifier we'd like to load. E.g.:
+
+```{r}
+library(ExperimentHub)
+eh <- ExperimentHub()        # initialize hub instance
+q <- query(eh, "TENxVisium") # retrieve 'TENxVisiumData' records
+id <- q$ah_id[1]             # specify dataset ID to load
+spe <- eh[[id]]              # load specified dataset
+```
+
+
+# Data representation
+
+Talk about spatial experiment
+
+# Data dictionaries
+
+Detailed tables representing what is provided in each dataset are listed here
+
+
+# Transforming VectraPolarosData to other formats
+
+Show how to transform from a spatial experiment object to a dataframe, if that is your prefered analysis method.
+
+# Citation info
+
+The objects provided in this package are rich data sources we encourage others to use in their own analyses. If you do include them in your peer-reviewed work, we ask that you cite our package and the original studies (either the lung cancer or ovarian cancer study, depending on which data source you use). 
+
+To cite the latest version of `VectraPolarisData` with `bibtex`, use
+
+```{}
+# need to add a citation file, see link below
+
+#https://bioconductor.org/developers/package-guidelines/#citation
+```
+
+To cite the `HumanLungCancerV3()` data, use:
+
+```{}
+@article{johnson2021cancer,
+  title={Cancer cell-specific MHCII expression as a determinant of the immune infiltrate organization and function in the non-small cell lung cancer tumor microenvironment},
+  author={Johnson, Amber M and Boland, Jennifer M and Wrobel, Julia and Klezcko, Emily K and Weisner-Evans, Mary and Heasley, Lynn and Clambey, Eric T and Nemenoff, Raphael A and Schenk, Erin L},
+  journal={bioRxiv},
+  year={2021},
+  publisher={Cold Spring Harbor Laboratory}
+}
+```
+
+To cite the `HumanOvarianCancerVP()` data, use:
+
+```{}
+@article{steinhart2021spatial,
+  title={The spatial context of tumor-infiltrating immune cells associates with improved ovarian cancer survival},
+  author={Steinhart, Benjamin and Jordan, Kimberly R and Bapat, Jaidev and Post, Miriam D and Brubaker, Lindsay W and Bitler, Benjamin G and Wrobel, Julia},
+  journal={Molecular Cancer Research},
+  volume={19},
+  number={12},
+  pages={1973--1979},
+  year={2021},
+  publisher={AACR}
+}
+```
+
+
+
+# other analyses using this data
+
