@@ -1,5 +1,5 @@
 ---
-title: "TENxVisiumData"
+title: "VectraPolarisData"
 author:
 - name: Julia Wrobel
   affiliation: Department of Biostatistics and Informatics, Colorado School of Public Health
@@ -23,7 +23,7 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup}
+```{r setup, include = FALSE}
 library(VectraPolarisData)
 ```
 
@@ -45,7 +45,7 @@ library(VectraPolarisData)
 spe <- HumanLungCancerV3()
 ```
 
-Alternatively, data can loaded directly from Bioconductor's `r Biocpkg("ExerimentHub")` as follows. First, we initialize a hub instance and store the complete list of records in a variable `eh`. Using `query()`, we then identify any records made available by the `VectraPolarisData` package, as well as their accession IDs (EH1234). Finally, we can load the data into R via `eh[[id]]`, where `id` corresponds to the data entry's identifier we'd like to load. E.g.:
+Alternatively, data can loaded directly from Bioconductor's `r Biocpkg("ExerimentHub")` as follows. First, we initialize a hub instance and store the complete list of records in a variable `eh`. Using `query()`, we then identify any records made available by the `VectraPolarisData` package, as well as their accession IDs (EH7311 for the lung cancer data). Finally, we can load the data into R via `eh[[id]]`, where `id` corresponds to the data entry's identifier we'd like to load. E.g.:
 
 ```{r}
 library(ExperimentHub)
@@ -58,7 +58,20 @@ spe <- eh[[id]]              # load specified dataset
 
 # Data Representation
 
-Talk about spatial experiment
+Both the `HumanLungCancerV3()` and `HumanOvarianCancerVP()` datasets are stored as `SpatialExperiment` objects. This allows users of our data to interact with methods built for `SingleCellExperiment`, `SummarizedExperiment`, and `SpatialExperiment` class methods in Bioconductor. See [this ebook](https://lmweber.org/OSTA-book/index.html#welcome) for more details on `SpatialExperiment`.
+
+
+The `SpatialExperiment` class was originally built for spatial transcriptomics data and follows the structure depicted in the schematic below (Righelli et al. 2021): 
+
+```{r, echo=FALSE}
+# image from Righelli et al. 2021
+url <- "https://lmweber.org/OSTA-book/images/SPE.png"
+```
+
+<center><img src="`r url`"></center>
+
+
+To use this class structure for multiplex imaging data we use slots in the following way.
 
 # Data Dictionaries
 
@@ -81,11 +94,10 @@ To cite the `HumanLungCancerV3()` data in `bibtex` format, use:
 
 ```{}
 @article{johnson2021cancer,
-  title={Cancer cell-specific MHCII expression as a determinant of the immune infiltrate organization and function in the non-small cell lung cancer tumor microenvironment},
-  author={Johnson, Amber M and Boland, Jennifer M and Wrobel, Julia and Klezcko, Emily K and Weisner-Evans, Mary and Heasley, Lynn and Clambey, Eric T and Nemenoff, Raphael A and Schenk, Erin L},
-  journal={bioRxiv},
-  year={2021},
-  publisher={Cold Spring Harbor Laboratory}
+  title={Cancer cell-specific MHCII expression as a determinant of the immune infiltrate organization and function in the non-small cell lung cancer tumor microenvironment.},
+  author={Johnson, AM and Boland, JM and Wrobel, J and Klezcko, EK and Weiser-Evans, M and Hopp, K and Heasley, L and Clambey, ET and Jordan, K and Nemenoff, RA and others},
+  journal={Journal of Thoracic Oncology: Official Publication of the International Association for the Study of Lung Cancer},
+  year={2021}
 }
 ```
 
@@ -103,8 +115,4 @@ To cite the `HumanOvarianCancerVP()` data, use:
   publisher={AACR}
 }
 ```
-
-
-
-# other analyses using this data
 
