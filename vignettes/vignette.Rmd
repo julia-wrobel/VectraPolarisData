@@ -38,50 +38,46 @@ List the two datasets here and mention that you have detailed data dictionaries 
 
 # Loading the data
 
-To retrieve a dataset, we can use a dataset's corresponding named function `<id>()`, where `<id>` should correspond to one a valid dataset identifier (see `?TENxVisiumData`). E.g.:
+To retrieve a dataset, we can use a dataset's corresponding named function `<id>()`, where `<id>` should correspond to one a valid dataset identifier (see `?VectraPolarisData`). E.g.:
 
 ```{r}
-library(TENxVisiumData)
-spe <- HumanHeart()
+library(VectraPolarisData)
+spe <- HumanLungCancerV3()
 ```
 
-Alternatively, data can loaded directly from Bioconductor's `r Biocpkg("ExerimentHub")` as follows. First, we initialize a hub instance and store the complete list of records in a variable `eh`. Using `query()`, we then identify any records made available by the `TENxVisiumData` package, as well as their accession IDs (EH1234). Finally, we can load the data into R via `eh[[id]]`, where `id` corresponds to the data entry's identifier we'd like to load. E.g.:
+Alternatively, data can loaded directly from Bioconductor's `r Biocpkg("ExerimentHub")` as follows. First, we initialize a hub instance and store the complete list of records in a variable `eh`. Using `query()`, we then identify any records made available by the `VectraPolarisData` package, as well as their accession IDs (EH1234). Finally, we can load the data into R via `eh[[id]]`, where `id` corresponds to the data entry's identifier we'd like to load. E.g.:
 
 ```{r}
 library(ExperimentHub)
 eh <- ExperimentHub()        # initialize hub instance
-q <- query(eh, "TENxVisium") # retrieve 'TENxVisiumData' records
+q <- query(eh, "VectraPolarisData") # retrieve 'VectraPolarisData' records
 id <- q$ah_id[1]             # specify dataset ID to load
 spe <- eh[[id]]              # load specified dataset
 ```
 
 
-# Data representation
+# Data Representation
 
 Talk about spatial experiment
 
-# Data dictionaries
+# Data Dictionaries
 
 Detailed tables representing what is provided in each dataset are listed here
 
+## HumanLungCancerV3
 
-# Transforming VectraPolarosData to other formats
+## HumanOvarianCancerVP
 
-Show how to transform from a spatial experiment object to a dataframe, if that is your prefered analysis method.
 
-# Citation info
+# Transforming VectraPolarisData to other formats
 
-The objects provided in this package are rich data sources we encourage others to use in their own analyses. If you do include them in your peer-reviewed work, we ask that you cite our package and the original studies (either the lung cancer or ovarian cancer study, depending on which data source you use). 
+Show how to transform from a spatial experiment object to a dataframe, if that is your preferred analysis method.
 
-To cite the latest version of `VectraPolarisData` with `bibtex`, use
+# Citation Info
 
-```{}
-# need to add a citation file, see link below
+The objects provided in this package are rich data sources we encourage others to use in their own analyses. If you do include them in your peer-reviewed work, we ask that you cite our package and the original studies. 
 
-#https://bioconductor.org/developers/package-guidelines/#citation
-```
-
-To cite the `HumanLungCancerV3()` data, use:
+To cite the `HumanLungCancerV3()` data in `bibtex` format, use:
 
 ```{}
 @article{johnson2021cancer,
