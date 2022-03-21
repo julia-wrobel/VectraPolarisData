@@ -30,11 +30,6 @@ library(VectraPolarisData)
 
 # multiplex immunofluorescence imaging data
 
-## Available datasets
-
-List the two datasets here and mention that you have detailed data dictionaries below. Give a very brief overview of multiplex imaging data.
-
-
 
 # Loading the data
 
@@ -58,7 +53,7 @@ spe <- eh[[id]]              # load specified dataset
 
 # Data Representation
 
-Both the `HumanLungCancerV3()` and `HumanOvarianCancerVP()` datasets are stored as `SpatialExperiment` objects. This allows users of our data to interact with methods built for `SingleCellExperiment`, `SummarizedExperiment`, and `SpatialExperiment` class methods in Bioconductor. See [this ebook](https://lmweber.org/OSTA-book/index.html#welcome) for more details on `SpatialExperiment`.
+Both the `HumanLungCancerV3()` and `HumanOvarianCancerVP()` datasets are stored as `SpatialExperiment` objects. This allows users of our data to interact with methods built for `SingleCellExperiment`, `SummarizedExperiment`, and `SpatialExperiment` class methods in Bioconductor. See [this ebook](https://lmweber.org/OSTA-book/index.html#welcome) for more details on `SpatialExperiment`. To get cell level tabular data that can be stored in this format, raw multiplex.tiff images have been preprocessed, segmented and cell phenotyped using [`Inform`](https://www.akoyabio.com/phenoimager/software/inform-tissue-finder/) software provided by Akoya Biosciences.
 
 
 The `SpatialExperiment` class was originally built for spatial transcriptomics data and follows the structure depicted in the schematic below (Righelli et al. 2021): 
@@ -71,7 +66,13 @@ url <- "https://lmweber.org/OSTA-book/images/SPE.png"
 <center><img src="`r url`"></center>
 
 
-To use this class structure for multiplex imaging data we use slots in the following way.
+To adapt this class structure for multiplex imaging data we use slots in the following way:
+
+* `assays` slot: `intensities`, `nucleus_intensities`, `membrane_intensities`
+* `sample_id` slot: contains image identifier. For the VectraOvarianDataVP this also identifies the subject because there is one image per subject
+* `colData` slot: Other cell-level characteristics of the marker intensities, cell phenotypes, cell shape characteristics
+* `spatialCoordsNames` slot: The `x-` and `y-` coordinates describing the location of the center point in the image for each cell
+* `metadata` slot: A dataframe of subject-level patient clinical characteristics.
 
 # Data Dictionaries
 
