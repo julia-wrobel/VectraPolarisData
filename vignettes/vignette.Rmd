@@ -1,7 +1,7 @@
 ---
 title: "VectraPolarisData"
 author:
-- name: Julia Wrobel
+- name: Julia Wrobel and Tusharkanti Ghosh
   affiliation: Department of Biostatistics and Informatics, Colorado School of Public Health
 output:
   BiocStyle::html_document:
@@ -85,6 +85,8 @@ Detailed tables representing what is provided in each dataset are listed here
 # Transforming VectraPolarisData to other formats
 
 Show how to transform from a spatial experiment object to a dataframe, if that is your preferred analysis method.
+
+
 
 # Citation Info
 
