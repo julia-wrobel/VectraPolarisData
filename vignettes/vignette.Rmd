@@ -23,9 +23,6 @@ knitr::opts_chunk$set(
 )
 ```
 
-```{r setup, include = FALSE}
-library(VectraPolarisData)
-```
 
 
 
@@ -33,14 +30,14 @@ library(VectraPolarisData)
 
 To retrieve a dataset, we can use a dataset's corresponding named function `<id>()`, where `<id>` should correspond to one a valid dataset identifier (see `?VectraPolarisData`). E.g.:
 
-```{r}
+```{r, message = FALSE, warning = FALSE}
 library(VectraPolarisData)
 spe <- HumanLungCancerV3()
 ```
 
 Alternatively, data can loaded directly from Bioconductor's `r Biocpkg("ExperimentHub")` as follows. First, we initialize a hub instance and store the complete list of records in a variable `eh`. Using `query()`, we then identify any records made available by the `VectraPolarisData` package, as well as their accession IDs (EH7311 for the lung cancer data). Finally, we can load the data into R via `eh[[id]]`, where `id` corresponds to the data entry's identifier we'd like to load. E.g.:
 
-```{r}
+```{r, eval = FALSE}
 library(ExperimentHub)
 eh <- ExperimentHub()        # initialize hub instance
 q <- query(eh, "VectraPolarisData") # retrieve 'VectraPolarisData' records
@@ -72,6 +69,94 @@ To adapt this class structure for multiplex imaging data we use slots in the fol
 * `spatialCoordsNames` slot: The `x-` and `y-` coordinates describing the location of the center point in the image for each cell
 * `metadata` slot: A dataframe of subject-level patient clinical characteristics.
 
+
+# Transforming to other data formats
+
+The following code shows how to transform the `SpatialExperiment` class object to a `data.frame` class object, if that is preferred for analysis. The example below is shown using the `HumanOvarianVP` dataset.
+
+```{r, message = FALSE}
+library(dplyr)
+
+spe_ovarian <- HumanOvarianCancerVP()
+
+## Assays slots
+assays_slot <- assays(spe_ovarian)
+intensities_df <- assays_slot$intensities
+rownames(intensities_df) <- paste0("total_", rownames(intensities_df))
+nucleus_intensities_df<- assays_slot$nucleus_intensities
+rownames(nucleus_intensities_df) <- paste0("nucleus_", rownames(nucleus_intensities_df))
+membrane_intensities_df<- assays_slot$membrane_intensities
+rownames(membrane_intensities_df) <- paste0("membrane_", rownames(membrane_intensities_df))
+
+# colData and spatialData
+colData_df <- colData(spe_ovarian)
+spatialCoords_df <- spatialCoords(spe_ovarian)
+
+
+
+# clinical data
+patient_level_df <- metadata(spe_ovarian)$clinical_data
+
+cell_level_df <- as.data.frame(cbind(colData_df, 
+                                     spatialCoords_df,
+                                     t(intensities_df),
+                                     t(nucleus_intensities_df),
+                                     t(membrane_intensities_df))
+                               )
+
+
+ovarian_df <- full_join(patient_level_df, cell_level_df, by = "sample_id")
+
+head(ovarian_df)
+```
+
+
+
+
+# Citation Info
+
+The objects provided in this package are rich data sources we encourage others to use in their own analyses. If you do include them in your peer-reviewed work, we ask that you cite our package and the original studies. 
+
+To cite the `VectraPolarisData` package, use:
+
+```{}
+@Manual{VectraPolarisData,
+    title = {VectraPolarisData: Vectra Polaris and Vectra 3 multiplex single-cell imaging data},
+    author = {Wrobel, J and Ghosh, T},
+    year = {2022},
+    note = {Bioconductor R package version 1.0},
+  }
+```
+
+
+To cite the `HumanLungCancerV3()` data in `bibtex` format, use:
+
+```{}
+@article{johnson2021cancer,
+  title={Cancer cell-specific MHCII expression as a determinant of the immune infiltrate organization and function in the non-small cell lung cancer tumor microenvironment.},
+  author={Johnson, AM and Boland, JM and Wrobel, J and Klezcko, EK and Weiser-Evans, M and Hopp, K and Heasley, L and Clambey, ET and Jordan, K and Nemenoff, RA and others},
+  journal={Journal of Thoracic Oncology: Official Publication of the International Association for the Study of Lung Cancer},
+  year={2021}
+}
+```
+
+To cite the `HumanOvarianCancerVP()` data, use:
+
+```{}
+@article{steinhart2021spatial,
+  title={The spatial context of tumor-infiltrating immune cells associates with improved ovarian cancer survival},
+  author={Steinhart, Benjamin and Jordan, Kimberly R and Bapat, Jaidev and Post, Miriam D and Brubaker, Lindsay W and Bitler, Benjamin G and Wrobel, Julia},
+  journal={Molecular Cancer Research},
+  volume={19},
+  number={12},
+  pages={1973--1979},
+  year={2021},
+  publisher={AACR}
+}
+```
+
+
+
 # Data Dictionaries
 
 Detailed tables representing what is provided in each dataset are listed here
@@ -83,7 +168,7 @@ In the table below note the following shorthand:
 * `[marker]` represents one of: `cd3`, `cd8`, `cd14`, `cd19`, `cd68`, `ck`, `dapi`, `hladr`,  
 * `[cell region]` represents one of: entire_cell, membrane, nucleus
 
-**Table 1: data dictionary for HumanOvarianCancerV3**
+**Table 1: data dictionary for HumanLungCancerV3**
 
 <style type="text/css">
 .tg  {border-collapse:collapse;border-spacing:0;}
@@ -93,6 +178,8 @@ In the table below note the following shorthand:
   font-weight:normal;overflow:hidden;padding:10px 5px;word-break:normal;}
 .tg .tg-l6li{border-color:inherit;font-size:10px;text-align:left;vertical-align:top}
 .tg .tg-0pky{border-color:inherit;text-align:left;vertical-align:top}
+.tg .tg-jpc1{font-size:10px;text-align:left;vertical-align:top}
+.tg .tg-0lax{text-align:left;vertical-align:top}
 </style>
 <table class="tg">
 <thead>
@@ -130,7 +217,7 @@ In the table below note the following shorthand:
   </tr>
   <tr>
     <td class="tg-l6li">cell_id</td>
-    <td class="tg-l6li" rowspan="12">colData<br><br><br><br><br><br><br><br></td>
+    <td class="tg-l6li" rowspan="13">colData<br><br><br><br><br><br><br><br></td>
     <td class="tg-l6li">cell identifier</td>
     <td class="tg-l6li"></td>
   </tr>
@@ -190,6 +277,11 @@ In the table below note the following shorthand:
     <td class="tg-l6li"></td>
   </tr>
   <tr>
+    <td class="tg-jpc1">phenotype_[marker]</td>
+    <td class="tg-jpc1">cell phenotype label as determined by Inform software</td>
+    <td class="tg-0lax"></td>
+  </tr>
+  <tr>
     <td class="tg-l6li">cell_x_position</td>
     <td class="tg-l6li" rowspan="2">spatialCoordsNames</td>
     <td class="tg-l6li">cell x coordinate</td>
@@ -202,79 +294,67 @@ In the table below note the following shorthand:
   </tr>
   <tr>
     <td class="tg-l6li">gender</td>
-    <td class="tg-l6li">metadata</td>
+    <td class="tg-l6li" rowspan="12">metadata</td>
     <td class="tg-l6li">gender</td>
     <td class="tg-l6li">"M", "F"</td>
   </tr>
   <tr>
     <td class="tg-l6li">mhcII_status</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">MHCII status, from Johnson et.al. 2021</td>
     <td class="tg-l6li">"low", "high"</td>
   </tr>
   <tr>
     <td class="tg-l6li">age_at_diagnosis</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li"><span style="font-weight:400;font-style:normal">age at diagnosis</span></td>
     <td class="tg-l6li"></td>
   </tr>
   <tr>
     <td class="tg-l6li">stage_at_diagnosis</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li"><span style="font-weight:400;font-style:normal">stage of the cancer when image was collected</span></td>
     <td class="tg-l6li"></td>
   </tr>
   <tr>
     <td class="tg-l6li">stage_numeric</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">numeric version of stage variable</td>
     <td class="tg-l6li"></td>
   </tr>
   <tr>
     <td class="tg-l6li">pack_years</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">pack-years of cigarette smoking</td>
     <td class="tg-l6li"></td>
   </tr>
   <tr>
     <td class="tg-l6li">survival_days</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">time in days from date of diagnosis to date of death or censoring event</td>
     <td class="tg-l6li"></td>
   </tr>
   <tr>
     <td class="tg-l6li">survival_status</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">did the participant pass away?</td>
     <td class="tg-l6li">0 = no, 1 = yes</td>
   </tr>
   <tr>
     <td class="tg-l6li">cause_of_death</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">cause of death</td>
     <td class="tg-l6li"></td>
   </tr>
   <tr>
     <td class="tg-l6li">recurrence_or_lung_ca_death</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">did the participant have a recurrence or death event?</td>
     <td class="tg-l6li">0 = no, 1 = yes</td>
   </tr>
   <tr>
     <td class="tg-l6li">time_to_recurrence_days</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">time in days from date of diagnosis to first recurrent event</td>
     <td class="tg-l6li"></td>
   </tr>
   <tr>
     <td class="tg-l6li">adjuvant_therapy</td>
-    <td class="tg-l6li"></td>
     <td class="tg-l6li">whether or not the participant received adjuvant therapy</td>
     <td class="tg-l6li">"No", "Yes"</td>
   </tr>
 </tbody>
 </table>
-
 
 ## HumanOvarianCancerVP
 
@@ -476,51 +556,3 @@ In the table below note the following shorthand:
      
      
      
-# Transforming to other data formats
-
-Show how to transform from a spatial experiment object to a dataframe, if that is your preferred analysis method.
-
-
-
-# Citation Info
-
-The objects provided in this package are rich data sources we encourage others to use in their own analyses. If you do include them in your peer-reviewed work, we ask that you cite our package and the original studies. 
-
-To cite the `VectraPolarisData` package, use:
-
-```{}
-@Manual{VectraPolarisData,
-    title = {VectraPolarisData: Vectra Polaris and Vectra 3 multiplex single-cell imaging data},
-    author = {Wrobel, J and Ghosh, T},
-    year = {2022},
-    note = {Bioconductor R package version 1.0},
-  }
-```
-
-
-To cite the `HumanLungCancerV3()` data in `bibtex` format, use:
-
-```{}
-@article{johnson2021cancer,
-  title={Cancer cell-specific MHCII expression as a determinant of the immune infiltrate organization and function in the non-small cell lung cancer tumor microenvironment.},
-  author={Johnson, AM and Boland, JM and Wrobel, J and Klezcko, EK and Weiser-Evans, M and Hopp, K and Heasley, L and Clambey, ET and Jordan, K and Nemenoff, RA and others},
-  journal={Journal of Thoracic Oncology: Official Publication of the International Association for the Study of Lung Cancer},
-  year={2021}
-}
-```
-
-To cite the `HumanOvarianCancerVP()` data, use:
-
-```{}
-@article{steinhart2021spatial,
-  title={The spatial context of tumor-infiltrating immune cells associates with improved ovarian cancer survival},
-  author={Steinhart, Benjamin and Jordan, Kimberly R and Bapat, Jaidev and Post, Miriam D and Brubaker, Lindsay W and Bitler, Benjamin G and Wrobel, Julia},
-  journal={Molecular Cancer Research},
-  volume={19},
-  number={12},
-  pages={1973--1979},
-  year={2021},
-  publisher={AACR}
-}
-```
-

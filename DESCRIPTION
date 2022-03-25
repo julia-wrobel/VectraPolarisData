@@ -24,7 +24,8 @@ RoxygenNote: 7.1.2
 Suggests: 
     BiocStyle,
     knitr,
-    rmarkdown
+    rmarkdown,
+    dplyr
 VignetteBuilder: knitr
 Encoding: UTF-8
 License: Artistic-2.0
