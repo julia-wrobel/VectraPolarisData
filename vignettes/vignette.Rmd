@@ -92,8 +92,6 @@ rownames(membrane_intensities_df) <- paste0("membrane_", rownames(membrane_inten
 colData_df <- colData(spe_ovarian)
 spatialCoords_df <- spatialCoords(spe_ovarian)
 
-
-
 # clinical data
 patient_level_df <- metadata(spe_ovarian)$clinical_data
 
@@ -107,7 +105,7 @@ cell_level_df <- as.data.frame(cbind(colData_df,
 
 ovarian_df <- full_join(patient_level_df, cell_level_df, by = "sample_id")
 
-head(ovarian_df)
+#head(ovarian_df)
 ```
 
 
@@ -554,5 +552,11 @@ In the table below note the following shorthand:
 
 **Note**: the `debulking` variable described as `optimal` if surgeon believes tumor area was reduced to 1 cm or below; `suboptimal` if surgeon was unable to remove significant amount of tumor due to various reasons; `interval` if tumor removal came after three cycles of chemo 
      
-     
+
+# Session Info
+
+```{r}
+sessionInfo()
+```
+
      

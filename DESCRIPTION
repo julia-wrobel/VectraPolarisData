@@ -1,13 +1,15 @@
 Package: VectraPolarisData
 Title: Vectra Polaris and Vectra 3 multiplex single-cell imaging data 
-Version: 0.1.0
+Version: 0.99.0
 Date: 2022-03-25
 Authors@R: c(
     person("Wrobel", "Julia", , "julia.wrobel@cuanschutz.edu", role = c("aut", "cre"),
     comment = c(ORCID = "0000-0001-6783-1421")),
     person("Tusharkanti", "Ghosh", role = "aut", email = "tusharkanti.ghosh@cuanschutz.edu"))
 Description: Provides two multiplex imaging datasets collected on Vectra instruments at the University of Colorado Anschutz Medical Campus.
-  Data are provided as a Spatial Experiment objects.
+    Data are provided as a Spatial Experiment objects. 
+    Data is provided in tabular form and has been segmented and phenotyped using Inform software.
+    Raw .tiff files are not included.
 URL: https://github.com/julia-wrobel/VectraPolarisData
 BugReports: https://support.bioconductor.org/t/VectraPolarisData
 biocViews: 
