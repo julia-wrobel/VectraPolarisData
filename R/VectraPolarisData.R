@@ -1,9 +1,7 @@
 #' @name VectraPolarisData
 #' @title VectraPolarisData
 #'
-#' @aliases
-#' LungCancerV3
-#' OvarianCancerVP
+#' @aliases HumanLungCancerV3 HumanOvarianCancerVP
 #'
 #' @description
 #' Vectra 3 and Vectra Polaris multiplex imaging datasets,
@@ -14,10 +12,10 @@
 #' @details
 #' The following Vectra multiplex imaging
 #' datasets are currently available
-#' (see the package vignette for links to details and ddata dictionaries):
+#' (see the package vignette for links to details and data dictionaries):
 #' \itemize{
-#' \item{LungCancerV3}
-#' \item{OvarianCancerVP}
+#' \item{HumanLungCancerV3}
+#' \item{HumanOvarianCancerVP}
 #' }
 #'
 #' @return
@@ -33,8 +31,13 @@
 #' q <- query(eh, "VectraPolarisData") # retrieve 'VectraPolarisData' records
 #' id <- q$ah_id[1]             # specify dataset ID to load
 #' spe <- eh[[id]]              # load specified dataset
-
 #'
+#' # alternatively one can load the datasets via
+#' library(VectraPolarisData)
+#' spe_lung <- HumanLungCancerV3()
+#' spe_ovarian <- HumanOvarianCancerVP()
 #'
 #' @author Julia Wrobel
 NULL
+
+

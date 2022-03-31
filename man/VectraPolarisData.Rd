@@ -2,8 +2,8 @@
 % Please edit documentation in R/VectraPolarisData.R
 \name{VectraPolarisData}
 \alias{VectraPolarisData}
-\alias{LungCancerV3}
-\alias{OvarianCancerVP}
+\alias{HumanLungCancerV3}
+\alias{HumanOvarianCancerVP}
 \title{VectraPolarisData}
 \value{
 a \code{\linkS4class{SpatialExperiment}}
@@ -19,10 +19,10 @@ for tutorials and workflow demonstrations, or similar purposes.
 \details{
 The following Vectra multiplex imaging
 datasets are currently available
-(see the package vignette for links to details and ddata dictionaries):
+(see the package vignette for links to details and data dictionaries):
 \itemize{
-\item{LungCancerV3}
-\item{OvarianCancerVP}
+\item{HumanLungCancerV3}
+\item{HumanOvarianCancerVP}
 }
 }
 \examples{
@@ -34,6 +34,10 @@ q <- query(eh, "VectraPolarisData") # retrieve 'VectraPolarisData' records
 id <- q$ah_id[1]             # specify dataset ID to load
 spe <- eh[[id]]              # load specified dataset
 
+# alternatively one can load the datasets via
+library(VectraPolarisData)
+spe_lung <- HumanLungCancerV3()
+spe_ovarian <- HumanOvarianCancerVP()
 
 }
 \author{
