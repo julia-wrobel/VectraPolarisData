@@ -28,9 +28,12 @@
 #' @examples
 #' # retrieve dataset of interest
 #'
-#' library(VectraPolarisData)
-#' spe_lung <- HumanLungCancerV3()
-#' spe_ovarian <- HumanOvarianCancerVP()
+#' library(ExperimentHub)
+#' eh <- ExperimentHub()        # initialize hub instance
+#' q <- query(eh, "VectraPolarisData") # retrieve 'VectraPolarisData' records
+#' id <- q$ah_id[1]             # specify dataset ID to load
+#' spe <- eh[[id]]              # load specified dataset
+
 #'
 #'
 #' @author Julia Wrobel

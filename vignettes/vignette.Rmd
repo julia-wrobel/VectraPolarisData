@@ -28,11 +28,12 @@ knitr::opts_chunk$set(
 
 # Loading the data
 
-To retrieve a dataset, we can use a dataset's corresponding named function `<id>()`, where `<id>` should correspond to one a valid dataset identifier (see `?VectraPolarisData`). E.g.:
+To retrieve a dataset, we can use a dataset's corresponding named function `<id>()`, where `<id>` should correspond to one a valid dataset identifier (see `?VectraPolarisData`). Below both the lung and ovarian cancer datasets are loaded this way.
 
 ```{r, message = FALSE, warning = FALSE}
 library(VectraPolarisData)
-spe <- HumanLungCancerV3()
+spe_lung <- HumanLungCancerV3()
+spe_ovarian <- HumanOvarianCancerVP()
 ```
 
 Alternatively, data can loaded directly from Bioconductor's `r Biocpkg("ExperimentHub")` as follows. First, we initialize a hub instance and store the complete list of records in a variable `eh`. Using `query()`, we then identify any records made available by the `VectraPolarisData` package, as well as their accession IDs (EH7311 for the lung cancer data). Finally, we can load the data into R via `eh[[id]]`, where `id` corresponds to the data entry's identifier we'd like to load. E.g.:
@@ -77,7 +78,7 @@ The following code shows how to transform the `SpatialExperiment` class object t
 ```{r, message = FALSE}
 library(dplyr)
 
-spe_ovarian <- HumanOvarianCancerVP()
+#spe_ovarian <- HumanOvarianCancerVP()
 
 ## Assays slots
 assays_slot <- assays(spe_ovarian)
