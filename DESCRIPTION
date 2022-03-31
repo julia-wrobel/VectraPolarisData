@@ -21,7 +21,8 @@ biocViews:
   ReproducibleResearch
 Depends:
     ExperimentHub,
-    SpatialExperiment
+    SpatialExperiment,
+    utils
 RoxygenNote: 7.1.2
 Suggests: 
     BiocStyle,
