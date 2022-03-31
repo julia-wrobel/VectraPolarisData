@@ -32,10 +32,6 @@
 #' id <- q$ah_id[1]             # specify dataset ID to load
 #' spe <- eh[[id]]              # load specified dataset
 #'
-#' # alternatively one can load the datasets via
-#' library(VectraPolarisData)
-#' spe_lung <- HumanLungCancerV3()
-#' spe_ovarian <- HumanOvarianCancerVP()
 #'
 #' @author Julia Wrobel
 NULL
