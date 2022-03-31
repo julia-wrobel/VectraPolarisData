@@ -6,7 +6,7 @@
 \alias{HumanOvarianCancerVP}
 \title{VectraPolarisData}
 \value{
-a \code{\linkS4class{SpatialExperiment}}
+a \code{\linkS4class{SpatialExperiment}} class object
 with rows corresponding to samples (cells)
 and columns to features (markers).
 }
