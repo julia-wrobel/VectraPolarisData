@@ -1,6 +1,6 @@
 Package: VectraPolarisData
 Title: Vectra Polaris and Vectra 3 multiplex single-cell imaging data 
-Version: 0.99.1
+Version: 0.99.2
 Date: 2022-03-25
 Authors@R: c(
     person("Wrobel", "Julia", , "julia.wrobel@cuanschutz.edu", role = c("aut", "cre"),
