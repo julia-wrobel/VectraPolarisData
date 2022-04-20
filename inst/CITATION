@@ -1,0 +1,10 @@
+citHeader("The objects provided in this package are rich data sources we encourage others to use in their own analyses. If you do include them in your peer-reviewed work, we ask that you cite our package and the original studies.")
+
+citEntry(
+  entry    = "Manual",
+  title    = "VectraPolarisData: Vectra Polaris and Vectra 3 multiplex single-cell imaging data",
+  author   = "Julia Wrobel and Tusharkanti Ghosh",
+  year     = "2022",
+  note = "R package version 1.0.0",
+  textVersion = "J. Wrobel and T. Ghosh. VectraPolarisData: Vectra Polaris and Vectra 3 multiplex single-cell imaging data, 2022."
+)
