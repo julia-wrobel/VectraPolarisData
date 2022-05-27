@@ -17,9 +17,7 @@ cancer, and are provided as objects of class `SpatialExperiment`.
 Now available in Bioconductor version 3.15! To install, use:
 
 ``` r
-
-# Installation instructions once new version of Bioc is available
-if (!requireNamespace("BiocManager", quietly = TRUE)) {
+if (!require("BiocManager", quietly = TRUE))
     install.packages("BiocManager")
 }
 
