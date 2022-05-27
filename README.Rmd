@@ -23,24 +23,17 @@ The `VectraPolarisData` package provides two large multiplex immunofluorescence 
 
 ## Installation instructions
 
-Until the next update of Bioconductor in April, the package is currently only available through GitHub and requires the developer version of Bioconductor to be installed: 
+Now available in Bioconductor version 3.15! To install, use:
 
 ```{r 'install', eval = FALSE}
-# This will also require you to install the devel version of R from CRAN
-if (!requireNamespace("BiocManager", quietly=TRUE))
-    install.packages("BiocManager")
-BiocManager::install(version = "devel")
-
-
-BiocManager::install("julia-wrobel/VectraPolarisData")
 
 
 # Installation instructions once new version of Bioc is available
-# if (!requireNamespace("BiocManager", quietly = TRUE)) {
-#     install.packages("BiocManager")
-# }
+if (!requireNamespace("BiocManager", quietly = TRUE)) {
+    install.packages("BiocManager")
+}
 
-#BiocManager::install("VectraPolarisData")
+BiocManager::install("VectraPolarisData")
 ```
 
 ## Example
